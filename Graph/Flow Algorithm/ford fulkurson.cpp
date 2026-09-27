@@ -1,9 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
-bool bfs(vector<vector<int>>&residugraph , int &src, int &dst , vector<int>&parent)
+bool bfs(vector<vector<int>>&residugraph, int &src, int &dst, vector<int>&parent)
 {
     int n = residugraph.size() - 1 ;
-    vector<bool> vis(n+1 , false);
+    vector<bool> vis(n+1, false);
     vis[src] = true;
     queue<int> q;
     q.push(src);
@@ -32,28 +32,28 @@ int main()
     cin >> vertex;
     int edge;
     cin >> edge ;
-    vector<vector<int>> residugraph(vertex+1 , vector<int>(vertex+1 , 0));
+    vector<vector<int>> residugraph(vertex+1, vector<int>(vertex+1, 0));
     for(int i=1 ; i<=edge ; i++)
     {
-        int u , v , w;
+        int u, v, w;
         cin >> u >> v >> w ;
         residugraph[u][v] = w ;
     }
 
-     // residue graph = capacity graphs
-     //logic
-     int src = 1;
+    // residue graph = capacity graphs
+    //logic
+    int src = 1;
     int dst = vertex ;
     vector<int> parent(vertex +1);
     int maxflow = 0;
-    while(bfs(residugraph , src, dst , parent))
+    while(bfs(residugraph, src, dst, parent))
     {
         int pathflow = INT_MAX;
 
         for(int v = dst ; v != src ; v = parent[v])
         {
             int u = parent[v] ;
-             pathflow = min(pathflow , residugraph[u][v]);
+            pathflow = min(pathflow, residugraph[u][v]);
         }
 
 
